@@ -66,7 +66,6 @@ public class EmeaAverageSensitivity implements SensitivityFunctionality{
                 allLowSensitivities.add(sensitivity);
             }
         }
-        System.out.println(allLowSensitivities);
     }
 
     @Override
@@ -76,7 +75,6 @@ public class EmeaAverageSensitivity implements SensitivityFunctionality{
                 allMidSensitivities.add(sensitivity);
             }
         }
-        System.out.println(allMidSensitivities);
     }
 
     @Override
@@ -86,7 +84,6 @@ public class EmeaAverageSensitivity implements SensitivityFunctionality{
                 allHighSensitivities.add(sensitivity);
             }
         }
-        System.out.println(allHighSensitivities);
     }
 
     @Override
@@ -111,6 +108,27 @@ public class EmeaAverageSensitivity implements SensitivityFunctionality{
                         .average()
                         .orElse(Double.NaN);
         System.out.println("1600 Dpi: " + Math.round(all1600dpi * 1000d) / 1000d);
+    }
+
+    public void runAverageSensitivityEmea() {
+        averageSensitivity();
+        convertEdpiToSens();
+        averageLowSensitivity();
+        averageMediumSensitivity();
+        averageHighSensitivity();
+    }
+
+    public void sensitivitiesByTeams() {
+        int i = 0;
+        for (EmeaSensitivity player : EmeaSensitivity.values()) {
+            if (i % 5 == 0) {
+                System.out.println(" ");
+                System.out.println(player.getTeamName().toUpperCase());
+                System.out.println(" ");
+            }
+            System.out.println(player.toString().charAt(0) + player.toString().substring(1) + ": " + player.getEdpi() + "DPI");
+            i++;
+        }
     }
 
     public static void main(String[] args) {
